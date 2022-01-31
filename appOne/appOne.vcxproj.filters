@@ -21,10 +21,14 @@
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="Actor.cpp" />
     <ClCompile Include="Ufo.cpp" />
+    <ClCompile Include="Component.cpp" />
+    <ClCompile Include="SpriteComponent.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game.h" />
     <ClInclude Include="Actor.h" />
     <ClInclude Include="Ufo.h" />
+    <ClInclude Include="Component.h" />
+    <ClInclude Include="SpriteComponent.h" />
   </ItemGroup>
 </Project>

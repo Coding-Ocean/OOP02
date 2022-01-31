@@ -5,10 +5,5 @@ class Ufo :
 {
 public:
     Ufo(class Game* game);
-    void UpdateActor() override;
-private:
-
-    //デバッグ用コード
-    int mImg;
 };
 

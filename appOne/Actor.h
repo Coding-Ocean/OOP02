@@ -1,5 +1,6 @@
 #pragma once
 #include "VECTOR2.h"
+#include <vector>
 class Actor
 {
 public:
@@ -25,6 +26,9 @@ public:
 	void SetScale(float scale) { mScale = scale; }
 
 	class Game* GetGame() { return mGame; }
+
+	void AddComponent(class Component*);
+	void RemoveComponent(class Component*);
 private:
 	//Actorの状態
 	State mState;
@@ -34,5 +38,7 @@ private:
 	float mScale;
 	//Gameクラスのpublicメンバにアクセスするポインタ
 	class Game* mGame;
+	//component配列
+	std::vector<class Component*> mComponents;
 };
 

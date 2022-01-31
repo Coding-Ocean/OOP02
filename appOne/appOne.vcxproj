@@ -154,8 +154,10 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Actor.cpp" />
+    <ClCompile Include="Component.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="gmain.cpp" />
+    <ClCompile Include="SpriteComponent.cpp" />
     <ClCompile Include="Ufo.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -166,7 +168,9 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Actor.h" />
+    <ClInclude Include="Component.h" />
     <ClInclude Include="Game.h" />
+    <ClInclude Include="SpriteComponent.h" />
     <ClInclude Include="Ufo.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
