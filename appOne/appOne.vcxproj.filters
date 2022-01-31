@@ -20,9 +20,11 @@
     <ClCompile Include="gmain.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="Actor.cpp" />
+    <ClCompile Include="Ufo.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game.h" />
     <ClInclude Include="Actor.h" />
+    <ClInclude Include="Ufo.h" />
   </ItemGroup>
 </Project>

@@ -156,6 +156,7 @@
     <ClCompile Include="Actor.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="gmain.cpp" />
+    <ClCompile Include="Ufo.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="resource.rc" />
@@ -166,6 +167,7 @@
   <ItemGroup>
     <ClInclude Include="Actor.h" />
     <ClInclude Include="Game.h" />
+    <ClInclude Include="Ufo.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
