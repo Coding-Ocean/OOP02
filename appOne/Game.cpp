@@ -21,6 +21,18 @@ bool Game::Initialize()
     a->SetScale(1.5f);
     auto sc = new SpriteComponent(a);
     sc->SetImage(loadImage("Assets\\Ship01.png"));
+
+    a = new Actor(this);
+    auto bgsc = new BGSpriteComponent(a, 50);
+    bgsc->setScrollSpeed(50);
+    bgsc->addImage(loadImage("Assets\\FarBack01.png"));
+    bgsc->addImage(loadImage("Assets\\FarBack02.png"));
+    bgsc = new BGSpriteComponent(a, 60);
+    bgsc->setScrollSpeed(100);
+    bgsc->addImage(loadImage("Assets\\Stars.png"));
+    bgsc->addImage(loadImage("Assets\\Stars.png"));
+
+    initDeltaTime();
     return true;
 }
 
@@ -90,6 +102,7 @@ void Game::ProcessInput()
 
 void Game::UpdateGame()
 {
+    setDeltaTime();
     for (auto actor : mActors)
     {
         actor->Update();
