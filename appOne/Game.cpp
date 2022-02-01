@@ -2,7 +2,7 @@
 #include "framework.h"
 #include "graphic.h"
 #include "window.h"
-#include "BGSpriteComponent.h"
+#include "SpriteComponent.h"
 #include "Ufo.h"
 
 bool Game::Initialize()
