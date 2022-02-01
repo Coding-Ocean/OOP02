@@ -1,5 +1,6 @@
 #pragma once
 #include <vector>
+#include "VECTOR2.h"
 class Game
 {
 public:
@@ -18,5 +19,14 @@ private:
 
 	std::vector<class Actor*>mActors;
 	std::vector<class SpriteComponent*>mSprites;
+
+	// Update中フラッグ
+	bool mUpdatingActors;
+	std::vector<class Actor*> mPendingActors;
+
+	//このGame固有の記述
+public:
+	const VECTOR2& GetUfoPos();
+	class Ufo* mUfo;
 };
 

@@ -10,10 +10,10 @@ bool Game::Initialize()
 {
     window(1024, 768);
 
-    Actor* a;
-    a = new Ufo(this);
-    a->SetPosition(VECTOR2(width / 4*3, height / 2));
+    mUfo = new Ufo(this);
+    mUfo->SetPosition(VECTOR2(width / 4 * 3, height / 2 - 100));
 
+    Actor* a;
     a = new Actor(this);
     a->SetPosition(VECTOR2(width / 4, height / 2));
     a->SetScale(1.5f);
@@ -58,7 +58,15 @@ void Game::Shutdown()
 
 void Game::AddActor(Actor* actor)
 {
-    mActors.emplace_back(actor);
+    //Update中なら、追加をUpdate後に延期する
+    if (mUpdatingActors)
+    {
+        mPendingActors.emplace_back(actor);
+    }
+    else
+    {
+        mActors.emplace_back(actor);
+    }
 }
 
 void Game::RemoveActor(Actor* actor)
@@ -105,9 +113,35 @@ void Game::ProcessInput()
 void Game::UpdateGame()
 {
     setDeltaTime();
+
+    // mActors更新(更新中にnewされたActorはmPendingActorsに追加される)
+    mUpdatingActors = true;
     for (auto actor : mActors)
     {
         actor->Update();
+    }
+    mUpdatingActors = false;
+
+    // 追加を延期したActorをmActorsに追加する
+    for (auto pending : mPendingActors)
+    {
+        mActors.emplace_back(pending);
+    }
+    mPendingActors.clear();
+
+    // Dead状態のActorを直下のdeadActorsに抽出する
+    std::vector<Actor*> deadActors;
+    for (auto actor : mActors)
+    {
+        if (actor->GetState() == Actor::EDead)
+        {
+            deadActors.emplace_back(actor);
+        }
+    }
+    // deadActorsを消去する(mActorsからも取り除かれる)
+    for (auto actor : deadActors)
+    {
+        delete actor;
     }
 }
 
@@ -118,4 +152,10 @@ void Game::GenerateOutput()
     {
         sprite->Draw();
     }
+    print(mActors.size());
+}
+
+const VECTOR2& Game::GetUfoPos()
+{
+    return mUfo->GetPosition();
 }

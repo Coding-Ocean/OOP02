@@ -25,6 +25,7 @@
     <ClCompile Include="SpriteComponent.cpp" />
     <ClCompile Include="BGSpriteComponent.cpp" />
     <ClCompile Include="AnimSpriteComponent.cpp" />
+    <ClCompile Include="Laser.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game.h" />
@@ -34,5 +35,6 @@
     <ClInclude Include="SpriteComponent.h" />
     <ClInclude Include="BGSpriteComponent.h" />
     <ClInclude Include="AnimSpriteComponent.h" />
+    <ClInclude Include="Laser.h" />
   </ItemGroup>
 </Project>
