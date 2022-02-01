@@ -3,6 +3,7 @@
 #include "graphic.h"
 #include "window.h"
 #include "BGSpriteComponent.h"
+#include "AnimSpriteComponent.h"
 #include "Ufo.h"
 
 bool Game::Initialize()
@@ -11,16 +12,17 @@ bool Game::Initialize()
 
     Actor* a;
     a = new Ufo(this);
-    a->SetPosition(VECTOR2(width / 3, height / 2));
-    a = new Ufo(this);
-    a->SetPosition(VECTOR2(width / 3*2, height / 2));
-    a->SetScale(1.5f);
+    a->SetPosition(VECTOR2(width / 4*3, height / 2));
 
     a = new Actor(this);
-    a->SetPosition(VECTOR2(100, height / 2));
+    a->SetPosition(VECTOR2(width / 4, height / 2));
     a->SetScale(1.5f);
-    auto sc = new SpriteComponent(a);
-    sc->SetImage(loadImage("Assets\\Ship01.png"));
+    auto asc = new AnimSpriteComponent(a);
+    asc->SetInterval(0.016f*3);
+    asc->AddImage(loadImage("Assets\\Ship01.png"));
+    asc->AddImage(loadImage("Assets\\Ship02.png"));
+    asc->AddImage(loadImage("Assets\\Ship03.png"));
+    asc->AddImage(loadImage("Assets\\Ship04.png"));
 
     a = new Actor(this);
     auto bgsc = new BGSpriteComponent(a, 50);

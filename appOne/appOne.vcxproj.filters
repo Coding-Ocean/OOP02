@@ -24,6 +24,7 @@
     <ClCompile Include="Component.cpp" />
     <ClCompile Include="SpriteComponent.cpp" />
     <ClCompile Include="BGSpriteComponent.cpp" />
+    <ClCompile Include="AnimSpriteComponent.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game.h" />
@@ -32,5 +33,6 @@
     <ClInclude Include="Component.h" />
     <ClInclude Include="SpriteComponent.h" />
     <ClInclude Include="BGSpriteComponent.h" />
+    <ClInclude Include="AnimSpriteComponent.h" />
   </ItemGroup>
 </Project>
