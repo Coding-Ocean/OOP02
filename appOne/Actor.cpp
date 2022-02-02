@@ -21,6 +21,19 @@ Actor::~Actor()
 	}
 }
 
+void Actor::ProcessInput()
+{
+	if (mState == EActive)
+	{
+		for (auto comp : mComponents)
+		{
+			comp->ProcessInput();
+		}
+
+		ActorInput();
+	}
+}
+
 void Actor::Update()
 {
 	if (mState == EActive)
@@ -29,6 +42,7 @@ void Actor::Update()
 		{
 			component->Update();
 		}
+
 		UpdateActor();
 	}
 }

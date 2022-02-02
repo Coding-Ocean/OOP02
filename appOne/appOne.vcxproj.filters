@@ -26,6 +26,10 @@
     <ClCompile Include="BGSpriteComponent.cpp" />
     <ClCompile Include="AnimSpriteComponent.cpp" />
     <ClCompile Include="Laser.cpp" />
+    <ClCompile Include="Ship.cpp" />
+    <ClCompile Include="MoveComponent.cpp" />
+    <ClCompile Include="InputComponent.cpp" />
+    <ClCompile Include="ShipLaser.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game.h" />
@@ -36,5 +40,9 @@
     <ClInclude Include="BGSpriteComponent.h" />
     <ClInclude Include="AnimSpriteComponent.h" />
     <ClInclude Include="Laser.h" />
+    <ClInclude Include="Ship.h" />
+    <ClInclude Include="MoveComponent.h" />
+    <ClInclude Include="InputComponent.h" />
+    <ClInclude Include="ShipLaser.h" />
   </ItemGroup>
 </Project>

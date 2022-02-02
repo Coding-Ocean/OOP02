@@ -25,8 +25,5 @@ private:
 	std::vector<class Actor*> mPendingActors;
 
 	//‚±‚ÌGameŒÅ—L‚Ì‹Lq
-public:
-	const VECTOR2& GetUfoPos();
-	class Ufo* mUfo;
 };
 

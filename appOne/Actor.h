@@ -11,8 +11,12 @@ public:
 
 	Actor(class Game* game);
 	virtual ~Actor();
+	
+	void ProcessInput();
+	virtual void ActorInput() {}
+
 	void Update();
-	virtual void UpdateActor() {};
+	virtual void UpdateActor() {}
 
 	//Getters,Setters
 	State GetState() const { return mState; }

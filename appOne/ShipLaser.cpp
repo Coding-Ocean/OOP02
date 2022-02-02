@@ -1,21 +1,21 @@
-#include "Laser.h"
+#include "ShipLaser.h"
 #include "MoveComponent.h"
 #include "SpriteComponent.h"
 #include "graphic.h"
 #include "window.h"
 #include "Game.h"
 
-Laser::Laser(Game* game)
+ShipLaser::ShipLaser(Game* game)
 	:Actor(game)
 {
 	mMc = new MoveComponent(this);
 	mMc->SetSpeed(600);
 
 	auto sc = new SpriteComponent(this, 50);
-	sc->SetImage(loadImage("Assets\\LaserG.png"));
+	sc->SetImage(loadImage("Assets\\Laser.png"));
 }
 
-void Laser::UpdateActor()
+void ShipLaser::UpdateActor()
 {
 	//ウィンドウの外に出たらDead
 	VECTOR2 pos = GetPosition();
@@ -25,12 +25,12 @@ void Laser::UpdateActor()
 	}
 }
 
-void Laser::SetSpeed(float speed)
+void ShipLaser::SetSpeed(float speed)
 {
 	mMc->SetSpeed(speed);
 }
 
-void Laser::SetDirection(const VECTOR2& direction)
+void ShipLaser::SetDirection(const VECTOR2& direction)
 {
 	mMc->SetDirection(direction);
 }

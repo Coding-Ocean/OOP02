@@ -159,7 +159,11 @@
     <ClCompile Include="Component.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="gmain.cpp" />
+    <ClCompile Include="InputComponent.cpp" />
     <ClCompile Include="Laser.cpp" />
+    <ClCompile Include="MoveComponent.cpp" />
+    <ClCompile Include="Ship.cpp" />
+    <ClCompile Include="ShipLaser.cpp" />
     <ClCompile Include="SpriteComponent.cpp" />
     <ClCompile Include="Ufo.cpp" />
   </ItemGroup>
@@ -175,7 +179,11 @@
     <ClInclude Include="BGSpriteComponent.h" />
     <ClInclude Include="Component.h" />
     <ClInclude Include="Game.h" />
+    <ClInclude Include="InputComponent.h" />
     <ClInclude Include="Laser.h" />
+    <ClInclude Include="MoveComponent.h" />
+    <ClInclude Include="Ship.h" />
+    <ClInclude Include="ShipLaser.h" />
     <ClInclude Include="SpriteComponent.h" />
     <ClInclude Include="Ufo.h" />
   </ItemGroup>

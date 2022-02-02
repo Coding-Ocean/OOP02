@@ -1,10 +1,10 @@
 #pragma once
 #include "Actor.h"
-class Laser :
+class ShipLaser :
     public Actor
 {
 public:
-    Laser(class Game*);
+    ShipLaser(class Game*);
     void UpdateActor() override;
     void SetSpeed(float speed);
     void SetDirection(const VECTOR2& direction);

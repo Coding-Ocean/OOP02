@@ -7,8 +7,10 @@ public:
 	Component(class Actor* owner, int updateOrder = 100);
 	// デストラクタ
 	virtual ~Component();
+	// このコンポーネントの入力処理
+	virtual void ProcessInput(){}
 	// このコンポーネントの更新処理
-	virtual void Update();
+	virtual void Update(){}
 
 	int GetUpdateOrder() const { return mUpdateOrder; }
 protected:

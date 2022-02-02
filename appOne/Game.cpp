@@ -5,25 +5,21 @@
 #include "BGSpriteComponent.h"
 #include "AnimSpriteComponent.h"
 #include "Ufo.h"
+#include "Ship.h"
 
 bool Game::Initialize()
 {
     window(1024, 768);
 
-    mUfo = new Ufo(this);
-    mUfo->SetPosition(VECTOR2(width / 4 * 3, height / 2 - 100));
+    new Ship(this);
+
+    auto ufo = new Ufo(this);
+    ufo->SetPosition(VECTOR2(width / 4 * 3, height/2 - 100));
+    ufo = new Ufo(this);
+    ufo->SetPosition(VECTOR2(width / 4 * 3, height/2 + 100));
+    ufo->SetTheta(3.14f);
 
     Actor* a;
-    a = new Actor(this);
-    a->SetPosition(VECTOR2(width / 4, height / 2));
-    a->SetScale(1.5f);
-    auto asc = new AnimSpriteComponent(a);
-    asc->SetInterval(0.016f*3);
-    asc->AddImage(loadImage("Assets\\Ship01.png"));
-    asc->AddImage(loadImage("Assets\\Ship02.png"));
-    asc->AddImage(loadImage("Assets\\Ship03.png"));
-    asc->AddImage(loadImage("Assets\\Ship04.png"));
-
     a = new Actor(this);
     auto bgsc = new BGSpriteComponent(a, 50);
     bgsc->setScrollSpeed(50);
@@ -108,6 +104,12 @@ void Game::RemoveSprite(SpriteComponent* sprite)
 
 void Game::ProcessInput()
 {
+    mUpdatingActors = true;
+    for (auto actor : mActors)
+    {
+        actor->ProcessInput();
+    }
+    mUpdatingActors = false;
 }
 
 void Game::UpdateGame()
@@ -153,9 +155,4 @@ void Game::GenerateOutput()
         sprite->Draw();
     }
     print(mActors.size());
-}
-
-const VECTOR2& Game::GetUfoPos()
-{
-    return mUfo->GetPosition();
 }
