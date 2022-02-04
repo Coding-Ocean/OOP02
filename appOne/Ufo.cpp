@@ -1,6 +1,8 @@
 #include "Ufo.h"
+#include "Game.h"
 #include "MoveComponent.h"
 #include "AnimSpriteComponent.h"
+#include "RectComponent.h"
 #include "graphic.h"
 #include "window.h"
 #include "Laser.h"
@@ -11,25 +13,42 @@ Ufo::Ufo(Game* game)
 	, mTimer(0.0f)
 	, mInterval(0.1f)
 	, mTheta(0.0f)
+	, mRect(nullptr)
+	, mHP(0)
 {
-	mMc = new MoveComponent(this);
-	mMc->SetSpeed(100);
+	mMove = new MoveComponent(this);
+	mMove->SetSpeed(100);
 
-	auto asc = new AnimSpriteComponent(this);
-	asc->SetInterval(0.016f * 2);
-	asc->AddImage(loadImage("Assets\\Enemy01.png"));
-	asc->AddImage(loadImage("Assets\\Enemy02.png"));
-	asc->AddImage(loadImage("Assets\\Enemy03.png"));
-	asc->AddImage(loadImage("Assets\\Enemy04.png"));
-	asc->AddImage(loadImage("Assets\\Enemy05.png"));
-	asc->AddImage(loadImage("Assets\\Enemy06.png"));
+	mAnimSprite = new AnimSpriteComponent(this);
+	mAnimSprite->SetInterval(0.016f * 2);
+	mAnimSprite->AddImage(loadImage("Assets\\Enemy01.png"));
+	mAnimSprite->AddImage(loadImage("Assets\\Enemy02.png"));
+	mAnimSprite->AddImage(loadImage("Assets\\Enemy03.png"));
+	mAnimSprite->AddImage(loadImage("Assets\\Enemy04.png"));
+	mAnimSprite->AddImage(loadImage("Assets\\Enemy05.png"));
+	mAnimSprite->AddImage(loadImage("Assets\\Enemy06.png"));
+
+	mRect = new RectComponent(this, 150);
+	mRect->SetHalfW(15);
+	mRect->SetHalfH(20);
+
+	mHP = 20;
+
+	GetGame()->AddUfo(this);
+}
+
+Ufo::~Ufo()
+{
+	GetGame()->RemoveUfo(this);
 }
 
 void Ufo::UpdateActor()
 {
+	//ã‰º‚É“®‚­
 	mTheta += 0.017f;
-	mMc->SetDirection(VECTOR2(0, sin(mTheta)));
+	mMove->SetDirection(VECTOR2(0, sinf(mTheta)));
 
+	//Laser”­ŽË
 	mTimer += delta;
 	if (mTimer > mInterval)
 	{
@@ -38,4 +57,13 @@ void Ufo::UpdateActor()
 		laser->SetPosition(GetPosition());
 		laser->SetDirection(VECTOR2(-1,0));
 	}
+}
+
+void Ufo::Damage()
+{
+	if (--mHP <= 0)
+	{
+		SetState(EDead);
+	}
+	mAnimSprite->StartFlash(0.032f,COLOR(255, 0, 0));
 }

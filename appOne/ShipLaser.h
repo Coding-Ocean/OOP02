@@ -9,6 +9,7 @@ public:
     void SetSpeed(float speed);
     void SetDirection(const VECTOR2& direction);
 private:
-    class MoveComponent* mMc;
+    class MoveComponent* mMove;
+    class RectComponent* mRect;
 };
 

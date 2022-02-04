@@ -15,20 +15,28 @@ bool Game::Initialize()
 
     auto ufo = new Ufo(this);
     ufo->SetPosition(VECTOR2(width / 4 * 3, height/2 - 100));
+
     ufo = new Ufo(this);
     ufo->SetPosition(VECTOR2(width / 4 * 3, height/2 + 100));
     ufo->SetTheta(3.14f);
 
+    ufo = new Ufo(this);
+    ufo->SetPosition(VECTOR2(width / 4 * 3, height / 2 - 100));
+    ufo->SetTheta(3.14f);
+
+    ufo = new Ufo(this);
+    ufo->SetPosition(VECTOR2(width / 4 * 3, height / 2 + 100));
+
     Actor* a;
     a = new Actor(this);
-    auto bgsc = new BGSpriteComponent(a, 50);
-    bgsc->setScrollSpeed(50);
-    bgsc->addImage(loadImage("Assets\\FarBack01.png"));
-    bgsc->addImage(loadImage("Assets\\FarBack02.png"));
-    bgsc = new BGSpriteComponent(a, 60);
-    bgsc->setScrollSpeed(100);
-    bgsc->addImage(loadImage("Assets\\Stars.png"));
-    bgsc->addImage(loadImage("Assets\\Stars.png"));
+    auto bg = new BGSpriteComponent(a, 50);
+    bg->SetScrollSpeed(100);
+    bg->SetImage(loadImage("Assets\\FarBack01.png"));
+    bg->SetImage(loadImage("Assets\\FarBack02.png"));
+    bg = new BGSpriteComponent(a, 60);
+    bg->SetScrollSpeed(200);
+    bg->SetImage(loadImage("Assets\\Stars.png"));
+    bg->SetImage(loadImage("Assets\\Stars.png"));
 
     initDeltaTime();
     return true;
@@ -154,5 +162,20 @@ void Game::GenerateOutput()
     {
         sprite->Draw();
     }
-    print(mActors.size());
+}
+
+//このゲームに固有のロジック
+void Game::AddUfo(Ufo* ufo)
+{
+    mUfos.emplace_back(ufo);
+}
+
+void Game::RemoveUfo(Ufo* ufo)
+{
+    auto iter = std::find(mUfos.begin(), mUfos.end(), ufo);
+    if (iter != mUfos.end())
+    {
+        std::iter_swap(iter, mUfos.end() - 1);
+        mUfos.pop_back();
+    }
 }

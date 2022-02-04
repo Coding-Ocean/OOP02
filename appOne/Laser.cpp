@@ -1,18 +1,24 @@
 #include "Laser.h"
-#include "MoveComponent.h"
-#include "SpriteComponent.h"
 #include "graphic.h"
 #include "window.h"
 #include "Game.h"
+#include "MoveComponent.h"
+#include "SpriteComponent.h"
+#include "RectComponent.h"
+#include "Ship.h"
 
 Laser::Laser(Game* game)
 	:Actor(game)
 {
-	mMc = new MoveComponent(this);
-	mMc->SetSpeed(600);
+	mMove = new MoveComponent(this);
+	mMove->SetSpeed(600);
 
 	auto sc = new SpriteComponent(this, 50);
 	sc->SetImage(loadImage("Assets\\LaserG.png"));
+
+	mRect = new RectComponent(this, 110);
+	mRect->SetHalfW(14);
+	mRect->SetHalfH(6);
 }
 
 void Laser::UpdateActor()
@@ -23,14 +29,26 @@ void Laser::UpdateActor()
 	{
 		SetState(EDead);
 	}
+	else 
+	{
+		//Ship‚Æ‚ÌÕ“Ë”»’è
+		if(auto ship = GetGame()->GetShip())
+		{
+			if (Intersect(mRect, ship->GetRect()))
+			{
+				SetState(EDead);
+				ship->Damage();
+			}
+		}
+	}
 }
 
 void Laser::SetSpeed(float speed)
 {
-	mMc->SetSpeed(speed);
+	mMove->SetSpeed(speed);
 }
 
 void Laser::SetDirection(const VECTOR2& direction)
 {
-	mMc->SetDirection(direction);
+	mMove->SetDirection(direction);
 }

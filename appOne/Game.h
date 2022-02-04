@@ -25,5 +25,14 @@ private:
 	std::vector<class Actor*> mPendingActors;
 
 	//Ç±ÇÃGameå≈óLÇÃãLèq
+public:
+	void AddUfo(class Ufo* ufo);
+	void RemoveUfo(class Ufo* ufo);
+	std::vector<class Ufo*>& GetUfos() { return mUfos; }
+	void SetShip(class Ship* ship) { mShip = ship; }
+	class Ship* GetShip() { return mShip; }
+private:
+	std::vector<class Ufo*> mUfos;
+	class Ship* mShip;
 };
 

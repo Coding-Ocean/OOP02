@@ -5,6 +5,7 @@
 #include "input.h"
 #include "InputComponent.h"
 #include "AnimSpriteComponent.h"
+#include "RectComponent.h"
 #include "ShipLaser.h"
 
 Ship::Ship(Game* game)
@@ -18,12 +19,25 @@ Ship::Ship(Game* game)
 	auto ic = new InputComponent(this);
 	ic->SetMoveSpeed(300);
 
-    auto asc = new AnimSpriteComponent(this);
-    asc->SetInterval(0.016f * 3);
-    asc->AddImage(loadImage("Assets\\Ship01.png"));
-    asc->AddImage(loadImage("Assets\\Ship02.png"));
-    asc->AddImage(loadImage("Assets\\Ship03.png"));
-    asc->AddImage(loadImage("Assets\\Ship04.png"));
+    mAnimSprite = new AnimSpriteComponent(this);
+    mAnimSprite->SetInterval(0.016f * 3);
+    mAnimSprite->AddImage(loadImage("Assets\\Ship01.png"));
+    mAnimSprite->AddImage(loadImage("Assets\\Ship02.png"));
+    mAnimSprite->AddImage(loadImage("Assets\\Ship03.png"));
+    mAnimSprite->AddImage(loadImage("Assets\\Ship04.png"));
+
+	mRect = new RectComponent(this, 150);
+	mRect->SetHalfW(10);
+	mRect->SetHalfH(30);
+
+	mHP = 50;
+
+	GetGame()->SetShip(this);
+}
+
+Ship::~Ship()
+{
+	GetGame()->SetShip(nullptr);
 }
 
 void Ship::ActorInput()
@@ -45,4 +59,13 @@ void Ship::ActorInput()
 	{
 		mTimer = mInterval;
 	}
+}
+
+void Ship::Damage()
+{
+	if (--mHP <= 0)
+	{
+		SetState(EDead);
+	}
+	mAnimSprite->StartFlash(0.032f, COLOR(255, 0, 255));
 }

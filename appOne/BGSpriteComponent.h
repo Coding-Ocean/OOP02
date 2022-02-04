@@ -1,22 +1,23 @@
 #pragma once
 #include "SpriteComponent.h"
 #include <vector>
+#include "VECTOR2.h"
 class BGSpriteComponent :
     public SpriteComponent
 {
 public:
     BGSpriteComponent(class Actor* owner, int drawOrder=100);
     ~BGSpriteComponent();
-    void addImage(int img);
+    void SetImage(int img) override;
     void Update() override;
     void Draw() override;
-    void setScrollSpeed(float speed) { mScrollSpeed = speed; }
+    void SetScrollSpeed(float speed) { mScrollSpeed = speed; }
 private:
-    struct Bg {
+    struct Back {
         int img;
-        float px;
+        VECTOR2 pos;
     };
-    std::vector<Bg>mBg;
+    std::vector<Back>mBack;
     float mScrollSpeed;
 };
 

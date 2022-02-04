@@ -162,6 +162,7 @@
     <ClCompile Include="InputComponent.cpp" />
     <ClCompile Include="Laser.cpp" />
     <ClCompile Include="MoveComponent.cpp" />
+    <ClCompile Include="RectComponent.cpp" />
     <ClCompile Include="Ship.cpp" />
     <ClCompile Include="ShipLaser.cpp" />
     <ClCompile Include="SpriteComponent.cpp" />
@@ -182,6 +183,7 @@
     <ClInclude Include="InputComponent.h" />
     <ClInclude Include="Laser.h" />
     <ClInclude Include="MoveComponent.h" />
+    <ClInclude Include="RectComponent.h" />
     <ClInclude Include="Ship.h" />
     <ClInclude Include="ShipLaser.h" />
     <ClInclude Include="SpriteComponent.h" />

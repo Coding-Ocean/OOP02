@@ -16,6 +16,8 @@ void AnimSpriteComponent::AddImage(int img)
 
 void AnimSpriteComponent::Update()
 {
+	SpriteComponent::Update();
+
 	mTimer += delta;
 	if (mTimer > mInterval)
 	{

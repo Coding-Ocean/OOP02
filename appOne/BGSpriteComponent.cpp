@@ -1,6 +1,5 @@
 #include "BGSpriteComponent.h"
 #include "Actor.h"
-#include "graphic.h"
 #include "window.h"
 
 BGSpriteComponent::BGSpriteComponent(Actor* owner, int drawOrder)
@@ -13,31 +12,32 @@ BGSpriteComponent::~BGSpriteComponent()
 {
 }
 
-void BGSpriteComponent::addImage(int img)
+void BGSpriteComponent::SetImage(int img)
 {
-	Bg bg;
-	bg.img = img;
-	bg.px = mBg.size() * width;
-	mBg.emplace_back(bg);
+	Back back;
+	back.img = img;
+	back.pos.x = width / 2 +  width * mBack.size();
+	back.pos.y = height / 2;
+	mBack.emplace_back(back);
 }
 
 void BGSpriteComponent::Update()
 {
-	for (int i = 0; i < mBg.size(); i++) 
+	for (auto& back : mBack)
 	{
-		mBg[i].px -= mScrollSpeed * delta;
-		if (mBg[i].px < -width) {
-			mBg[i].px += width * 2;
+		back.pos.x -= mScrollSpeed * delta;
+		if (back.pos.x < -width / 2) {
+			back.pos.x += width * 2;
 		}
 	}
 }
 
 void BGSpriteComponent::Draw()
 {
-	rectMode(CORNER);
-	for (int i = 0; i < mBg.size(); i++)
+	for (auto& back : mBack)
 	{
-		image(mBg[i].img, mBg[i].px, 0);
+		mOwner->SetPosition(back.pos);
+		SpriteComponent::SetImage(back.img);
+		SpriteComponent::Draw();
 	}
 }
-

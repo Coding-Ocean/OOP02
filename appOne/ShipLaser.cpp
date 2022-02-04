@@ -1,18 +1,24 @@
 #include "ShipLaser.h"
-#include "MoveComponent.h"
-#include "SpriteComponent.h"
 #include "graphic.h"
 #include "window.h"
+#include "MoveComponent.h"
+#include "SpriteComponent.h"
+#include "RectComponent.h"
 #include "Game.h"
+#include "Ufo.h"
 
 ShipLaser::ShipLaser(Game* game)
 	:Actor(game)
 {
-	mMc = new MoveComponent(this);
-	mMc->SetSpeed(600);
+	mMove = new MoveComponent(this);
+	mMove->SetSpeed(600);
 
 	auto sc = new SpriteComponent(this, 50);
 	sc->SetImage(loadImage("Assets\\Laser.png"));
+
+	mRect = new RectComponent(this, 110);
+	mRect->SetHalfW(14);
+	mRect->SetHalfH(6);
 }
 
 void ShipLaser::UpdateActor()
@@ -23,14 +29,24 @@ void ShipLaser::UpdateActor()
 	{
 		SetState(EDead);
 	}
+	else{
+		//Õ“Ë”»’è
+		for (auto ufo : GetGame()->GetUfos()) {
+			if (Intersect(mRect, ufo->GetRect()))
+			{
+				SetState(EDead);
+				ufo->Damage();
+			}
+		}
+	}
 }
 
 void ShipLaser::SetSpeed(float speed)
 {
-	mMc->SetSpeed(speed);
+	mMove->SetSpeed(speed);
 }
 
 void ShipLaser::SetDirection(const VECTOR2& direction)
 {
-	mMc->SetDirection(direction);
+	mMove->SetDirection(direction);
 }
